@@ -6,23 +6,7 @@
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
-<body>
-  <section id="container">
-
-    <header class="clearfix">
-      <h1>Флэшкарточкер</h1>
-      <ul class="navigation-links">
-        <li><%= link_to "Все карточки",        '#'%></li>
-        <li><%= link_to "Добавить карточку",   '#'%></li>
-      </ul>
-    </header>
-
-    <section>
-      <p style="font-size: 22px;">
-         <%= yield %>
-      </p>
-    </section>
-
-  </section>
-</body>
+  <body>
+    <%= yield %>
+  </body>
 </html>
