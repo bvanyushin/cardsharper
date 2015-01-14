@@ -1,4 +1,20 @@
 <%= form_for :card, url: cards_path do |f| %>
+  
+  <% if @card.errors.any? %>
+    <div id="error_message">
+      <h2>
+        <%= pluralize(@card.errors.count, "error") %> prohibited
+        this card from being saved:
+      </h2>
+      <ul>
+        <% @card.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
   <p>
     <%= f.label :"Слово" %><br>
     <%= f.text_field :original_text %>
