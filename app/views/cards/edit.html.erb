@@ -1,35 +1,5 @@
 <h1>Редактировать карточку</h1>
  
-<%= form_for :card, url: cards_path(@card), method: :patch do |f| %>
- 
-  <% if @card.errors.any? %>
-    <div id="error_message">
-      <h2>
-        <%= pluralize(@card.errors.count, "error") %> prohibited
-        this article from being saved:
-      </h2>
-      <ul>
-        <% @card.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<%= render 'form' %>
 
-  <p>
-    <%= f.label :"Слово" %><br>
-    <%= f.text_field :original_text %>
-  </p>
-
-  <p>
-    <%= f.label :"Перевод" %><br>
-    <%= f.text_field :translated_text %>
-  </p>
-
-  <p>
-    <%= f.submit %>
-  </p>
- 
-<% end %>
-
-<%= link_to 'Back', cards_path %>
+<%= link_to 'Вернуться', cards_path %>
