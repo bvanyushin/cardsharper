@@ -6,8 +6,7 @@ class  CardsController < ApplicationController
   def show
     @card = Cards.find(params[:id])
   end
- 
+
   def new
   end
-
 end
