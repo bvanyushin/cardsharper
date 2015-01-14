@@ -1,0 +1,15 @@
+<%= form_for :card, url: cards_path do |f| %>
+  <p>
+    <%= f.label :"Слово" %><br>
+    <%= f.text_field :original_text %>
+  </p>
+
+  <p>
+    <%= f.label :"Перевод" %><br>
+    <%= f.text_field :translated_text %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
