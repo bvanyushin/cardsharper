@@ -1,0 +1,12 @@
+<p>
+  <strong>Слово:</strong>
+  <%= @card.original_text %>
+</p>
+ 
+<p>
+  <strong>Перевод:</strong>
+  <%= @card.translated_text %>
+</p>
+
+<%= link_to 'Вернуться', cards_path %> |
+<%= link_to 'Редактировать', edit_card_path(@card) %>
