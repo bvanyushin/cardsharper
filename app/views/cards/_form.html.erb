@@ -1,6 +1,6 @@
 <%= form_for @card do |f| %>
 
-<% if @card.errors.any? %>
+  <% if @card.errors.any? %>
     <div id="error_message">
       <h2>
         <%= pluralize(@card.errors.count, "error") %> prohibited
@@ -15,12 +15,12 @@
   <% end %>
 
   <p>
-    <%= f.label :"Слово" %><br>
+    <%= f.label "Слово" %><br>
     <%= f.text_field :original_text %>
   </p>
 
   <p>
-    <%= f.label :"Перевод" %><br>
+    <%= f.label "Перевод" %><br>
     <%= f.text_field :translated_text %>
   </p>
 
