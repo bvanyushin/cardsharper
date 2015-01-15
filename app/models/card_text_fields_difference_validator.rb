@@ -1,4 +1,4 @@
-class CardFieldsValidator < ActiveModel::Validator
+class CardTextFieldsDifferenceValidator < ActiveModel::Validator
   def validate(card)
     if card.original_text == card.translated_text
       card.errors[:base] << "Fields must have different values."

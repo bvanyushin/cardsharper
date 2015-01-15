@@ -1,5 +1,4 @@
 class Card < ActiveRecord::Base
-  validates :original_text, presence: true
-  validates :translated_text, presence: true
-  validates_with CardFieldsValidator
+  validates :translated_text, :original_text,  presence: true
+  validates_with CardTextFieldsDifferenceValidator
 end
