@@ -7,7 +7,7 @@ gem 'rails', '4.2.0'
 
 gem 'pg'
 
-gem 'simple_form'
+#gem 'simple_form'
 
 
 # Use SCSS for stylesheets

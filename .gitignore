@@ -36,4 +36,4 @@ config/database.yml
 /vendor/assets/stylesheets/.keep
 /vendor/assets/javascripts/.keep
 /test/models/.keep
-/lib/templates/erb/scaffold/_form.html.erb
+
