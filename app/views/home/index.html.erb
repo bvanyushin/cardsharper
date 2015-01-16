@@ -15,6 +15,17 @@
       <p style="font-size: 22px;">
          <%= yield %>
       </p>
-    </section>
+      <div>
+        <p>
+          <strong>Слово:</strong><br>
+          <%= @card.original_text %>
 
+          <%= form_tag("/check_card", method: "get") do %>
+            <strong><%= label(:user_answer, "Перевод:") %></strong><br>
+                    <%= text_field_tag(:user_answer) %><br>
+                    <%= submit_tag("Проверить") %>
+          <% end %>
+        </p>
+      </div>  
+    </section>
   </section>
