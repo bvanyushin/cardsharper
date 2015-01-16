@@ -20,7 +20,7 @@
           <%= flash[:message] %>
         </p>
         <p>
-           <% if @card != nil %>
+          <% if @card != nil %>
             <%= form_tag("/check_card", method: "get") do %>
               <strong>Слово:</strong><br>
               <%= @card.original_text %><br>
