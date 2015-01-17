@@ -1,8 +1,7 @@
 class HomeController < ApplicationController
-
   def index
-      @card = Card.where("review_date <= CURRENT_TIMESTAMP").order("RANDOM()").first
-    if @card != nil 
+    @card = Card.where("review_date <= ?", Time.now).order("RANDOM()").first
+    if @card != nil
       flash[:card_id] = @card.id
     end
   end
@@ -12,7 +11,7 @@ class HomeController < ApplicationController
     @user_answer = @user_answers[:user_answer]
 
     @card = Card.find(flash[:card_id])
-    
+
     if @card.translated_text == @user_answer
       @card.review_date = Time.now.midnight + 3.day
       @card.save
@@ -23,6 +22,4 @@ class HomeController < ApplicationController
 
     redirect_to home_index_path
   end
-
 end
-
