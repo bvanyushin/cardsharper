@@ -7,13 +7,7 @@ class HomeController < ApplicationController
     check_params
 
     @card = Card.find(params[:card_id])
-
-    if @card.answer_correct?(params[:user_answer])
-      @card.move_review_date!
-      flash[:message]  = "Правильно"
-    else
-      flash[:message]  = "Неправильно"
-    end
+    flash[:message] = @card.review(params[:user_answer])
 
     redirect_to root_path
   end

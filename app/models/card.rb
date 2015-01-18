@@ -4,12 +4,14 @@ class Card < ActiveRecord::Base
   scope :relevant_for_today, -> { where("review_date <= ?", Time.now) } 
   scope :random_sorted, -> { order("RANDOM()") } 
 
-  def move_review_date!(days_to_move = 3)
-    self.review_date = Time.now.midnight + days_to_move.day
-    save
+  def review(user_answer)
+    if translated_text == user_answer 
+      days_to_move = 3
+      update_attributes( { review_date: (Time.now.midnight + days_to_move.day) } )
+      return "Правильно"
+    else 
+      return "Неправильно"
+    end
   end
 
-  def answer_correct?(user_answer)
-    translated_text == user_answer
-  end
 end
