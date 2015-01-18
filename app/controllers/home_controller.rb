@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @card = Card.relevant_for_today().random_sorted().first
+    @card = Card.relevant_for_today.random_sorted.first
   end
 
   def check_card
