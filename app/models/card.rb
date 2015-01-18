@@ -1,19 +1,24 @@
 class Card < ActiveRecord::Base
   validates :translated_text, :original_text, presence: true
   validates_with CardTextFieldsDifferenceValidator
-  scope :relevant_for_today, -> { where("review_date <= ?", Time.now) }
-  scope :random_sorted, -> { order("RANDOM()") }
-
+  
+  after_initialize :set_review_date
+  
+  scope :relevant_for_today, -> { where("review_date <= ?", Time.now).order("RANDOM()")  }
+  
   def review(user_answer)
-    user_answer.strip!
-    user_answer.downcase!
-
-    if translated_text.downcase == user_answer
+    if translated_text.downcase == user_answer.strip.downcase
       days_to_move = 3
       update_attributes(review_date: (Time.now.midnight + days_to_move.day))
-      return "Правильно"
+      return true
     else
-      return "Неправильно"
+      return false
     end
+  end
+
+  private
+
+  def set_review_date
+    update_attributes(review_date:Time.now.midnight)
   end
 end
