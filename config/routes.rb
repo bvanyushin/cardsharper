@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   get "home/index"
 
-  put "check_card" => "home#check_card"
+  put "check" => "home#check_card"
 
   root "home#index"
 

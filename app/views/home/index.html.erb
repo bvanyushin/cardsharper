@@ -18,7 +18,7 @@
         </p>
         <p>
           <% if @card != nil %>
-            <%= form_tag("/check_card", method: "put") do %>
+            <%= form_tag("check", method: "put") do %>
               <strong>Слово:</strong><br>
               <%= @card.original_text %><br>
               <%= hidden_field_tag(:card_id, @card.id) %>
