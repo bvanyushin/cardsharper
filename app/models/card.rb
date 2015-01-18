@@ -5,7 +5,10 @@ class Card < ActiveRecord::Base
   scope :random_sorted, -> { order("RANDOM()") } 
 
   def review(user_answer)
-    if translated_text == user_answer 
+    user_answer.strip!
+    user_answer.downcase!
+    
+    if translated_text.downcase == user_answer 
       days_to_move = 3
       update_attributes( { review_date: (Time.now.midnight + days_to_move.day) } )
       return "Правильно"
