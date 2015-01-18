@@ -1,25 +1,26 @@
 class HomeController < ApplicationController
   def index
-    @card = Card.where("review_date <= ?", Time.now).order("RANDOM()").first
-    if @card != nil
-      flash[:card_id] = @card.id
-    end
+    @card = Card.actual_on(Time.now).order("RANDOM()").first
   end
 
   def check_card
-    @user_answers = params.permit(:user_answer)
-    @user_answer = @user_answers[:user_answer]
+    check_params
 
-    @card = Card.find(flash[:card_id])
+    @card = Card.find(params[:card_id])
 
-    if @card.translated_text == @user_answer
-      @card.review_date = Time.now.midnight + 3.day
-      @card.save
+    if @card.answer_correct?(params[:user_answer])
+      @card.move_review_date!
       flash[:message]  = "Правильно"
     else
       flash[:message]  = "Неправильно"
     end
 
-    redirect_to home_index_path
+    redirect_to root_path
+  end
+
+  private
+
+  def check_params
+    params.permit(:user_answer, :card_id)
   end
 end
