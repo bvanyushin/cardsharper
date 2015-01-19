@@ -3,7 +3,7 @@ class Card < ActiveRecord::Base
   validates_with CardTextFieldsDifferenceValidator
   after_create :set_review_date
   scope :relevant_for_today, -> { where("review_date <= ?", Time.now).order("RANDOM()") }
-  
+
   def review(user_answer)
     if translated_text.strip.downcase == user_answer.strip.downcase
       update_attributes(review_date: Time.now.midnight + 3.day)

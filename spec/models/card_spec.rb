@@ -1,11 +1,11 @@
 require "rails_helper"
 
-RSpec.describe Card, :type => :model do
-  test_card = Card.create(:original_text => "Тест", 
-                          :translated_text => "test ")
+RSpec.describe Card, type: :model do
+  test_card = Card.create(original_text: "Тест",
+                          translated_text: => "test ")
 
-  it "checks for correct translation without capitalization, 
-  leading and trailing spaces" do  
+  it "checks for correct translation without capitalization,
+  leading and trailing spaces" do
     expect(test_card.review(" tESt   ")).to eql true
   end
 
