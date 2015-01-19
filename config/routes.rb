@@ -9,9 +9,7 @@ Rails.application.routes.draw do
 
   resources :cards
 
-  put "check" => "home#check_card" 
-
-
+  put "check" => "home#check_card"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
