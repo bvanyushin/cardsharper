@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :cards
 
-  put "check" => "home#check_card"
+  put "card_review" => "home#card_review"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
