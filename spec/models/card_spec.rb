@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe Card, type: :model do
   test_card = Card.create(original_text: "Тест",
-                          translated_text: => "test ")
+                          translated_text: "test ")
 
   it "checks for correct translation without capitalization,
   leading and trailing spaces" do
