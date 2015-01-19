@@ -5,7 +5,7 @@ class Card < ActiveRecord::Base
   scope :relevant_for_today, -> { where("review_date <= ?", Time.now).order("RANDOM()") }
   
   def review(user_answer)
-    if translated_text.downcase == user_answer.strip.downcase
+    if translated_text.strip.downcase == user_answer.strip.downcase
       update_attributes(review_date: Time.now.midnight + 3.day)
       return true
     else
