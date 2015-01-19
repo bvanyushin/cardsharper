@@ -3,7 +3,7 @@ class HomeController < ApplicationController
     @card = Card.relevant_for_today.first
   end
 
-  def card_review
+  def review_card
     @card = Card.find(review_params[:card_id])
     if @card.review(params[:user_answer])
       flash[:message] = "Правильно"

@@ -6,7 +6,7 @@ class Card < ActiveRecord::Base
   
   def review(user_answer)
     if translated_text.downcase == user_answer.strip.downcase
-      update_attributes(review_date: (Time.now.midnight + 3.day))
+      update_attributes(review_date: Time.now.midnight + 3.day)
       return true
     else
       return false

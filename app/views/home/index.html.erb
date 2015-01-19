@@ -1,32 +1,21 @@
-<section id="container">
-
-  <header class="clearfix">
-    <h1>Флэшкарточкер</h1>
-    <ul class="navigation-links">
-      <li><%= link_to "Все карточки",        cards_path %></li>
-      <li><%= link_to "Добавить карточку",   new_card_path %></li>
-    </ul>
-  </header>
-
-  <section>
-    <div>
-      <p><%= flash[:message] %></p>
-      <p>
-        <% if @card.present? %>
-          <%= form_tag card_review_path, method: "put" do %>
-            <strong>Слово:</strong><br>
-            <%= @card.original_text %><br>
-            <%= hidden_field_tag(:card_id, @card.id) %>
-            <strong>
-                <%= label(:user_answer, "Перевод:") %>
-            </strong><br>
-            <%= text_field_tag(:user_answer) %><br>
-            <%= submit_tag("Проверить") %>
-          <% end %>
-        <% else %>
-          Нет карточек для повторения.
-        <% end %>  
-      </p>
-    </div>  
-  </section>
+<section>
+  <div>
+    <p><%= flash[:message] %></p>
+    <p>
+      <% if @card.present? %>
+        <%= form_tag review_card_path, method: "put" do %>
+          <strong>Слово:</strong><br>
+          <%= @card.original_text %><br>
+          <%= hidden_field_tag(:card_id, @card.id) %>
+          <strong>
+              <%= label(:user_answer, "Перевод:") %>
+          </strong><br>
+          <%= text_field_tag(:user_answer) %><br>
+          <%= submit_tag("Проверить") %>
+        <% end %>
+      <% else %>
+        Нет карточек для повторения.
+      <% end %>  
+    </p>
+  </div>  
 </section>
