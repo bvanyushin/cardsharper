@@ -4,9 +4,7 @@ class HomeController < ApplicationController
   end
 
   def check_card
-    check_params
-
-    @card = Card.find(params[:card_id])
+    @card = Card.find(review_params[:card_id])
     if @card.review(params[:user_answer])
       flash[:message] = "Правильно"
     else
@@ -18,7 +16,7 @@ class HomeController < ApplicationController
 
   private
 
-  def check_params
+  def review_params
     params.permit(:user_answer, :card_id)
   end
 end

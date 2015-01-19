@@ -5,11 +5,13 @@ Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
   get "home/index"
 
-  put "check" => "home#check_card"
-
   root "home#index"
 
   resources :cards
+
+  put "check" => "home#check_card" 
+
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
