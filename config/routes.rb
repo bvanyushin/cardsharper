@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :cards
 
+  put "review_card" => "home#review_card"
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

@@ -1,12 +1,12 @@
 <h1>Карточки</h1>
- 
+
 <table>
   <tr>
     <th>Слово</th>
     <th>Перевод</th>
     <th>Последнее повторение</th>
   </tr>
- 
+
   <% @cards.each do |card| %>
     <tr>
       <td><%= card.original_text %></td>
