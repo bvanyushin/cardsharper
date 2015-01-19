@@ -12,13 +12,13 @@ describe Card do
     expect(test_card.review("not test")).to eql false
   end
 
-  it "moves the review date if answer is correct 3 days from today" do
+  it "moves the review date if answer is correct 3 days from today for if review date is today" do
     test_card.review_date = Date.today
     test_card.review("test")
     expect(test_card.review_date).to eql Date.today + 3.day
   end
 
-  it "moves the review date if answer is correct 3 days from today" do
+  it "moves the review date if answer is correct 3 days from today for any date" do
     test_card.review_date = Date.tomorrow
     test_card.review("test")
     expect(test_card.review_date).to eql Date.today + 3.day
