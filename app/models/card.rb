@@ -1,7 +1,7 @@
 class Card < ActiveRecord::Base
-  validates :translated_text, :original_text, presence: true
+  validates :translated_text, :original_text, :review_date, presence: true
   validates_with CardTextFieldsDifferenceValidator
-  after_create :set_review_date
+  before_validation :set_review_date
   scope :relevant_for_today, -> { where("review_date <= ?", Time.now).order("RANDOM()") }
 
   def review(user_answer)
@@ -13,9 +13,9 @@ class Card < ActiveRecord::Base
     end
   end
 
-  private
+  private 
 
   def set_review_date
-    update_attributes(review_date: Date.today)
+    self.review_date ||= Date.today
   end
 end
