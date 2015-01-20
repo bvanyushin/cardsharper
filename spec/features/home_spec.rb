@@ -1,5 +1,19 @@
 require "rails_helper"
 
+describe "links tests" do
+  it "opens add_a_new_card_page, after clicking on link 'Добавить карточку'" do
+    visit '/'
+    click_link("Добавить карточку")
+    expect(page).to have_content "Новая карточка"
+  end
+  
+  it "opens page containing all cards, after clicking on link 'Все карточки'" do
+    visit '/'
+    click_link("Все карточки")
+    page.has_selector?("all-cards-list")
+  end
+end
+
 describe "the card selection process" do
   before :each do
     @test_card=Card.create(original_text: "Правильное значение", 
@@ -8,7 +22,6 @@ describe "the card selection process" do
   end
 
    it "displays No_Card_message if there isn`t relevant cards" do
-    @test_card.review_date = Date.tomorrow
     visit '/'
     expect(page).to have_content "Нет карточек для повторения"
   end
@@ -37,21 +50,4 @@ describe "the card review process" do
     click_button "Проверить"
     expect(page).to have_content "Неправильно"
   end
-
- 
-end 
-
-describe "links tests" do
-  it "opens add a new card page, after clicking on link 'Добавить карточку'" do
-    visit '/'
-    click_link("Добавить карточку")
-    expect(page).to have_content "Новая карточка"
-  end
-  
-  it "opens page containing all cards, after clicking on link 'Все карточки'" do
-    visit '/'
-    click_link("Все карточки")
-    page.has_selector?("all-cards-list")
-  end
 end
-
