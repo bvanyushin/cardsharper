@@ -5,6 +5,7 @@ describe "main page opens" do
     visit "/"
     expect(page).to have_content "Флэшкарточкер"
   end
+end
 
 describe "links tests" do
   it "opens add_a_new_card_page, after clicking on link 'Добавить карточку'" do
