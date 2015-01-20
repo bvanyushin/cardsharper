@@ -38,9 +38,13 @@ end
 
 gem 'capybara', '~> 2.2.0'
 
+gem 'factory_girl_rails'
+
 group :test do
   gem 'rspec-rails', '~> 3.0'
 end
+
+gem 'database_cleaner'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

@@ -2,8 +2,7 @@ require "rails_helper"
 
 describe Card do
   before :each do
-    @test_card = Card.create(original_text: "Правильное значение",
-                             translated_text: "Correct value")
+    @test_card = FactoryGirl.create :card
   end
 
   it "checks for correct translation without capitalization, leading and trailing spaces" do

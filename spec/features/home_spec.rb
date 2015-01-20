@@ -15,22 +15,22 @@ describe "links tests" do
 end
 
 describe "the card selection process" do
-  before :each do
-    @test_card = Card.create(original_text: "Правильное значение",
-                             translated_text: "Correct value",
-                             review_date: Date.tomorrow)   
-  end
-
   it "displays No_Card_message if there isn`t relevant cards" do
     visit "/"
     expect(page).to have_content "Нет карточек для повторения"
   end
+
+  it "selects only relevant cards to display" do
+    @test_card = FactoryGirl.create :card, review_date: Date.tomorrow
+    visit "/"
+    expect(page).to have_content "Нет карточек для повторения"
+  end
+  DatabaseCleaner.clean
 end
 
 describe "the card review process" do
   before :each do
-    @test_card = Card.create(original_text: "Правильное значение",
-                             translated_text: "Correct value")
+    @test_card = FactoryGirl.create :card
   end
 
   it "displays 'Правильно' if answer is valid" do
