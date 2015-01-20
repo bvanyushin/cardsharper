@@ -16,12 +16,12 @@ end
 
 describe "the card selection process" do
   before :each do
-    @test_card=Card.create(original_text: "Правильное значение", 
+    @test_card = Card.create(original_text: "Правильное значение",
                            translated_text: "Correct value",
                            review_date: Date.tomorrow)   
   end
 
-   it "displays No_Card_message if there isn`t relevant cards" do
+  it "displays No_Card_message if there isn`t relevant cards" do
     visit '/'
     expect(page).to have_content "Нет карточек для повторения"
   end
@@ -29,14 +29,14 @@ end
 
 describe "the card review process" do
   before :each do
-    @test_card=Card.create(original_text: "Правильное значение", 
-                translated_text: "Correct value")
+    @test_card = Card.create(original_text: "Правильное значение",
+                             translated_text: "Correct value")
   end
 
   it "displays 'Правильно' if answer is valid" do
     visit '/'
     within("#review-form") do
-      fill_in "user_answer", :with => "Correct value"
+      fill_in "user_answer", with: "Correct value"
     end
     click_button "Проверить"
     expect(page).to have_content "Правильно"
@@ -45,7 +45,7 @@ describe "the card review process" do
   it "displays 'Неправильно' if answer is not valid" do
     visit '/'
     within("#review-form") do
-      fill_in "user_answer", :with => "Incorrect value"
+      fill_in "user_answer", with: "Incorrect value"
     end
     click_button "Проверить"
     expect(page).to have_content "Неправильно"
