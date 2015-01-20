@@ -1,5 +1,11 @@
 require "rails_helper"
 
+describe "main page opens" do
+  it "Opens main page with text 'Флэшкарточкер'" do
+    visit "/"
+    expect(page).to have_content "Флэшкарточкер"
+  end
+
 describe "links tests" do
   it "opens add_a_new_card_page, after clicking on link 'Добавить карточку'" do
     visit "/"

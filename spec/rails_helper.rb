@@ -6,8 +6,12 @@ require 'rspec/rails'
 require 'capybara/rails'
 require 'factory_girl_rails'
 require 'database_cleaner'
+require 'capybara/poltergeist'
+
 
 DatabaseCleaner.strategy = :truncation
+
+Capybara.javascript_driver = :poltergeist
 
 # Add additional requires below this line. Rails is not loaded until this point!
 
