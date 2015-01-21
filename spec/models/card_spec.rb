@@ -2,11 +2,11 @@ require "rails_helper"
 
 describe Card do
   before :each do
-    @test_card = FactoryGirl.create :card
+    @test_card = FactoryGirl.create :card, translated_text: " Correct value "
   end
 
   it "checks for correct translation without capitalization, leading and trailing spaces" do
-    expect(@test_card.review(" Correct vaLUe")).to eql true
+    expect(@test_card.review("  Correct vaLUe")).to be_true
   end
 
   it "checks for correct translation" do
