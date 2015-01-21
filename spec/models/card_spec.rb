@@ -1,26 +1,26 @@
 require "rails_helper"
 
 describe Card do
-  test_card = Card.create(original_text: "Тест",
-                          translated_text: "test ")
+  let(:card) { FactoryGirl.create :card, translated_text: " Correct value " }
 
   it "checks for correct translation without capitalization, leading and trailing spaces" do
-    expect(test_card.review(" tESt   ")).to eql true
+    expect(card.review("  Correct vaLUe")).to be true
   end
 
   it "checks for correct translation" do
-    expect(test_card.review("not test")).to eql false
+    expect(card.review("Incorrect value")).to be false
   end
 
   it "moves the review date if answer is correct 3 days from today if review date is today" do
-    test_card.review_date = Date.today
-    test_card.review("test")
-    expect(test_card.review_date).to eql Date.today + 3.day
+    card.review_date = Date.today
+    card.review("Correct value")
+    expect(card.review_date).to eql Date.today + 3.day
   end
 
   it "moves the review date if answer is correct 3 days from today for any date in past" do
-    test_card.review_date = Date.yesterday
-    test_card.review("test")
-    expect(test_card.review_date).to eql Date.today + 3.day
+    card.review_date = Date.yesterday
+    card.review("Correct value")
+    expect(
+      card.review_date).to eql Date.today + 3.day
   end
 end

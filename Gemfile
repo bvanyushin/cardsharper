@@ -9,6 +9,8 @@ gem 'pg'
 
 #gem 'simple_form'
 
+gem 'poltergeist'
+
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -36,9 +38,15 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+gem 'capybara', '~> 2.2.0'
+
+gem 'factory_girl_rails'
+
 group :test do
   gem 'rspec-rails', '~> 3.0'
 end
+
+gem 'database_cleaner'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
