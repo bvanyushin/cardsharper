@@ -2,20 +2,20 @@ require "rails_helper"
 
 describe "main page opens" do
   it "Opens main page with text 'Флэшкарточкер'" do
-    visit "/"
+    visit root_path
     expect(page).to have_content "Флэшкарточкер"
   end
 end
 
 describe "links tests" do
   it "opens add_a_new_card_page, after clicking on link 'Добавить карточку'" do
-    visit "/"
+    visit root_path
     click_link("Добавить карточку")
     expect(page).to have_content "Новая карточка"
   end
 
   it "opens page containing all cards, after clicking on link 'Все карточки'" do
-    visit "/"
+    visit root_path
     click_link("Все карточки")
     page.has_selector?("all-cards-list")
   end
@@ -23,13 +23,13 @@ end
 
 describe "the card selection process" do
   it "displays No_Card_message if there isn`t relevant cards" do
-    visit "/"
+    visit root_path
     expect(page).to have_content "Нет карточек для повторения"
   end
 
   it "selects only relevant cards to display" do
     @test_card = FactoryGirl.create :card, review_date: Date.tomorrow
-    visit "/"
+    visit root_path
     expect(page).to have_content "Нет карточек для повторения"
   end
   DatabaseCleaner.clean
@@ -41,7 +41,7 @@ describe "the card review process" do
   end
 
   it "displays 'Правильно' if answer is valid" do
-    visit "/"
+    visit root_path
     within("#review-form") do
       fill_in "user_answer", with: "Correct value"
     end
@@ -50,7 +50,7 @@ describe "the card review process" do
   end
 
   it "displays 'Неправильно' if answer is not valid" do
-    visit "/"
+    visit root_path
     within("#review-form") do
       fill_in "user_answer", with: "Incorrect value"
     end
