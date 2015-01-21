@@ -6,7 +6,7 @@ describe "main page tests" do
     expect(page).to have_content "Флэшкарточкер"
   end
 
-  it "opens add_a_new_card_page, after clicking on link 'Добавить карточку'" do
+  it "opens a new card page, after clicking on link 'Добавить карточку'" do
     visit root_path
     click_link("Добавить карточку")
     expect(page).to have_content "Новая карточка"
@@ -15,6 +15,6 @@ describe "main page tests" do
   it "opens page containing all cards, after clicking on link 'Все карточки'" do
     visit root_path
     click_link("Все карточки")
-    page.has_selector?("all-cards-list")
+    expect(page).to have_content "Список всех карточек"
   end
 end
