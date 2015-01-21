@@ -1,6 +1,7 @@
 require "rails_helper"
 
 describe "main page card selection and review process" do
+  
   before :each do
     @test_card = FactoryGirl.create :card, translated_text: "Correct value"
   end
