@@ -12,7 +12,8 @@ describe "main page card selection process" do
   end
 
   it "displays a relevant card when there is one" do
-    @test_card = FactoryGirl.create :card, original_text: "Правильное значение", review_date: Date.today
+    @test_card = FactoryGirl.create :card, original_text: "Правильное значение", 
+                                           review_date: Date.today
     visit root_path
     expect(page).to have_content "Правильное значение"
   end

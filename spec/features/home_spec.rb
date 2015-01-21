@@ -18,4 +18,3 @@ describe "main page tests" do
     page.has_selector?("all-cards-list")
   end
 end
-
