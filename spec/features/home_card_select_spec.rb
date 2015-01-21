@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "main page card selection process" do
   after :each do
-     DatabaseCleaner.clean
+    DatabaseCleaner.clean
   end
 
   it "displays No_Card_message when there isn`t relevant cards to display" do
