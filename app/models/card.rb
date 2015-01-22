@@ -1,4 +1,5 @@
 class Card < ActiveRecord::Base
+  belongs_to :user
   validates :translated_text, :original_text, :review_date, presence: true
   validates_with CardTextFieldsDifferenceValidator
   before_validation :set_review_date
