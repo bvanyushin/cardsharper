@@ -2,7 +2,7 @@ require "rails_helper"
 
 describe "main page tests" do
   let(:user) { FactoryGirl.create :user }
-  
+
   it "Opens with text 'Флэшкарточкер'" do
     visit root_path
     expect(page).to have_content "Флэшкарточкер"
@@ -22,7 +22,8 @@ describe "main page tests" do
 
   describe "card review process" do
     before :each do
-      @test_card = FactoryGirl.create :card, translated_text: "Correct value", user_id: user.id
+      @test_card = FactoryGirl.create :card, translated_text: "Correct value",
+                                             user_id: user.id
     end
 
     it "displays success message if answer is valid" do
@@ -64,7 +65,7 @@ describe "main page tests" do
     end
 
     it "selects only relevant cards to display" do
-      @test_card = FactoryGirl.create :card, review_date: Date.tomorrow, 
+      @test_card = FactoryGirl.create :card, review_date: Date.tomorrow,
                                              user_id: user.id
       visit root_path
       expect(page).to have_content "Нет карточек для повторения"
