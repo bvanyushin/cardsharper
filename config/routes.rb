@@ -11,7 +11,12 @@ Rails.application.routes.draw do
 
   resources :users
 
+  resources :user_sessions
+
   put "review_card" => "home#review_card"
+
+  get 'login' => 'user_sessions#new', as: :login
+  post 'logout' => 'user_sessions#destroy', as: :logout
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
