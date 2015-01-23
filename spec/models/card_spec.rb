@@ -1,7 +1,9 @@
 require "rails_helper"
 
 describe Card do
-  let(:card) { FactoryGirl.create :card, translated_text: " Correct value " }
+  let(:user) { FactoryGirl.create :user }
+  let(:card) { FactoryGirl.create :card, translated_text: " Correct value ",
+                                         user_id: user.id }
 
   it "checks for correct translation without capitalization, leading and trailing spaces" do
     expect(card.review("  Correct vaLUe")).to be true

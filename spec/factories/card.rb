@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :card do
-    original_text "Правильное значение"
-    translated_text "Correct Value"
+    original_text "Строка"
+    translated_text "String"
   end
 end
