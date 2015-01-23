@@ -48,6 +48,8 @@ end
 
 gem 'database_cleaner'
 
+gem "sorcery"
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

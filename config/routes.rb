@@ -9,6 +9,8 @@ Rails.application.routes.draw do
 
   resources :cards
 
+  resources :users
+
   put "review_card" => "home#review_card"
 
   # Example of regular route:
