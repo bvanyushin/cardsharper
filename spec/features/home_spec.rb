@@ -1,6 +1,11 @@
 require "rails_helper"
   
 describe "main page tests" do
+  let(:user) { FactoryGirl.create :user, email: "unique@example.com",
+                                         password: "password" }
+  let(:second_user) { FactoryGirl.create :user }
+  let(:card) { FactoryGirl.create :card, translated_text: " Correct value ",
+                                         user_id: user.id }
   def login_user
     click_link("Войти")
     within("#login-form") do
@@ -10,20 +15,16 @@ describe "main page tests" do
     click_button "Войти"
   end
 
-  let(:user) { FactoryGirl.create :user, email: "unique@example.com",
-                                         password: "password" }
-  let(:second_user) { FactoryGirl.create :user }
-  let(:card) { FactoryGirl.create :card, translated_text: " Correct value ",
-                                         user_id: user.id }
-
   before :each do
     visit root_path
     login_user
-    # Assume that login wil redirects to root_path. If it shouldn`t uncomment next string
-    # visit root_path
   end
 
-  it "Opens with text 'Флэшкарточкер'" do
+  it "displays successfully login message" do
+    expect(page).to have_content "Login successful"
+  end
+
+  it "Redirects to source page after login" do
     expect(page).to have_content "Флэшкарточкер"
   end
 
@@ -42,6 +43,7 @@ describe "main page tests" do
       @test_card = FactoryGirl.create :card, original_text: "Правильное значение",
                                              translated_text: "Correct value",
                                              user_id: user.id
+      visit root_path
     end
 
     it "displays success message if answer is valid" do
@@ -73,8 +75,9 @@ describe "main page tests" do
 
     it "displays a relevant card when there is one" do
       @test_card = FactoryGirl.create :card, original_text: "Правильное значение", 
-                                             review_date: Date.today,
+                                             review_date: Date.yesterday,
                                              user_id: user.id
+      visit root_path
       expect(page).to have_content "Правильное значение"
     end
 
@@ -85,7 +88,7 @@ describe "main page tests" do
     end
 
     it "Doesn`t show cards of other user" do
-      @test_card = FactoryGirl.create :card, review_date: Date.tomorrow,
+      @test_card = FactoryGirl.create :card, review_date: Date.today,
                                              user_id: second_user.id
       expect(page).to have_content "Нет карточек для повторения"
     end
