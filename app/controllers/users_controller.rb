@@ -33,31 +33,24 @@ class UsersController < ApplicationController
 
   # PATCH/PUT /users/1
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        redirect_to @user, notice: 'User was successfully updated.'
-      else
-        render action: 'edit'
-      end
+    if @user.update(user_params)
+      redirect_to @user, notice: 'User was successfully updated.'
+    else
+      render action: 'edit'
     end
   end
 
   # DELETE /users/1
   def destroy
     @user.destroy
-    respond_to do |format|
-      redirect_to root_path
-    end
+    redirect_to root_path
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_user
-      @user = User.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-  private
+  def set_user
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation)
