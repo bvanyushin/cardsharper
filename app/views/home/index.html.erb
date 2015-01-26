@@ -3,20 +3,22 @@
   <div id="review-form" >
     <p><%= flash[:message] %></p>
     <p>
-      <% if @card.present? %>
-        <%= form_tag review_card_path, method: "put" do %>
-          <strong>Слово:</strong><br>
-          <%= @card.original_text %><br>
-          <%= hidden_field_tag(:card_id, @card.id) %>
-          <strong>
-              <%= label(:user_answer, "Перевод:") %>
-          </strong><br>
-          <%= text_field_tag(:user_answer) %><br>
-          <%= submit_tag("Проверить") %>
+      <% if current_user %>
+        <% if @card.present? %>
+          <%= form_tag review_card_path, method: "put" do %>
+            <strong>Слово:</strong><br>
+            <%= @card.original_text %><br>
+            <%= hidden_field_tag(:card_id, @card.id) %>
+            <strong>
+                <%= label(:user_answer, "Перевод:") %>
+            </strong><br>
+            <%= text_field_tag(:user_answer) %><br>
+            <%= submit_tag("Проверить") %>
+          <% end %>
+        <% else %>
+          Нет карточек для повторения.
         <% end %>
-      <% else %>
-        Нет карточек для повторения.
-      <% end %>  
+      <% end %>
     </p>
   </div>  
 </section>

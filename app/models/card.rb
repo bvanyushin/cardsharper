@@ -5,6 +5,7 @@ class Card < ActiveRecord::Base
   validates_with CardTextFieldsDifferenceValidator
   before_validation :set_review_date
   scope :relevant_for_today, -> { where("review_date <= ?", Time.now).order("RANDOM()") }
+  scope :of_user, -> user{where(user: user)}
 
   def review(user_answer)
     if translated_text.strip.downcase == user_answer.strip.downcase

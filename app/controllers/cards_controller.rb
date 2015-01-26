@@ -2,7 +2,7 @@ class CardsController < ApplicationController
   before_action :find_card, except: [:index, :new, :create]
 
   def index
-    @cards = Card.all
+    @cards = Card.of_user(current_user).all
   end
 
   def show
@@ -42,6 +42,7 @@ class CardsController < ApplicationController
   private
 
   def card_params
+    params[:card][:user_id] = current_user.id
     params.require(:card).permit(:original_text, :translated_text, :user_id)
   end
 
