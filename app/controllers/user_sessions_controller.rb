@@ -1,25 +1,20 @@
 class UserSessionsController < ApplicationController
-
+  skip_before_filter :require_login, except: [:destroy]
   def new
     @user = User.new
   end
 
-  def create 
-    login_params
-    if @user = login(params[:email], params[:pasword])
-      redirect_back_or_to(users_path, notice: "Login successful")
+  def create
+    if @user = login(params[:email], params[:password])
+      redirect_back_or_to(root_path, notice: 'Login successful')
     else
-      flash.now[:alert] = "Login failed"
-      render "new"
+      flash.now[:alert] = 'Login failed'
+      render action: 'new'
     end
   end
 
   def destroy
     logout
-    redirect_to(users_path, flash[:notice] = "Logged out!")
-  end
-
-  def login_params
-    params.permit(:email, :password)
+    redirect_to(root_path, notice: 'Logged out!')
   end
 end
