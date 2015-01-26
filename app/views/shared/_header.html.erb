@@ -1,13 +1,13 @@
 <header class="clearfix">
   <h1>Флэшкарточкер</h1><br>
-  <h2>user -><%= current_user.id %><-</h2>
+  <h2>user --<%= current_user %>--</h2>
   <ul class="navigation-links">
     <li><%= link_to "Все карточки",        cards_path %></li>
     <li><%= link_to "Добавить карточку",   new_card_path %></li>
     <% if current_user %>
-      <li> <%= link_to "Выйти", :logout, method: :post %>
+      <li> <%= link_to "Выйти", logout_path, method: :post %>
     <% else %>
-      <li> <%= link_to "Войти", :login %>
+      <li> <%= link_to "Войти", login_path %>
       <li> <%= link_to "Зарегистрироваться", new_user_path %>
     <% end %>
     <br>

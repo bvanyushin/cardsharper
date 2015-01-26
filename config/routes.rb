@@ -15,8 +15,9 @@ Rails.application.routes.draw do
 
   put "review_card" => "home#review_card"
 
-  get 'login' => 'user_sessions#new', as: :login
-  post 'logout' => 'user_sessions#destroy', as: :logout
+  get 'login' => 'user_sessions#new'
+  
+  post 'logout' => 'user_sessions#destroy'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
