@@ -39,7 +39,8 @@ describe "main page tests" do
 
   describe "card review process" do
     before :each do
-      @test_card = FactoryGirl.create :card, translated_text: "Correct value",
+      @test_card = FactoryGirl.create :card, original_text: "Правильное значение",
+                                             translated_text: "Correct value",
                                              user_id: user.id
     end
 
