@@ -48,5 +48,9 @@ class CardsController < ApplicationController
 
   def find_card
     @card = Card.find(params[:id])
+    if @card.user_id != current_user.id
+      @card = nil
+      redirect_to cards_path
+    end
   end
 end
