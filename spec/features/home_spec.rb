@@ -24,6 +24,16 @@ describe "main page tests" do
     expect(page).to have_content "Login successful"
   end
 
+  it "logout link works" do 
+    click_link("Выйти")
+    expect(page).to have_content "Войти"
+  end
+
+  it "edit profile link works" do 
+    click_link("Редактировать профиль")
+    expect(page).to have_content "Editing User"
+  end
+
   it "Redirects to source page after login" do
     expect(page).to have_content "Флэшкарточкер"
   end
