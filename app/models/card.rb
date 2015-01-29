@@ -1,7 +1,7 @@
 class Card < ActiveRecord::Base
-  has_attached_file :picture, 
-                    styles: { medium: "360x360>" }, 
-                    default_url: "/images/:style/missing.png" 
+  has_attached_file :picture,
+                    styles: { medium: "360x360>" },
+                    default_url: "/images/:style/missing.png"
 
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
   validates :translated_text, :original_text, :review_date,
