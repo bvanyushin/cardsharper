@@ -12,7 +12,7 @@ class CardsController < ApplicationController
   end
 
   def new
-    @card = Card.new
+    @card = current_user.cards.new
   end
 
   def update
@@ -42,15 +42,10 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params[:card][:user_id] = current_user.id
-    params.require(:card).permit(:original_text, :translated_text, :user_id)
+    params.require(:card).permit(:original_text, :translated_text)
   end
 
   def find_card
-    @card = Card.find(params[:id])
-    if @card.user_id != current_user.id
-      @card = nil
-      redirect_to cards_path
-    end
+    @card = current_user.cards.find(params[:id])
   end
 end

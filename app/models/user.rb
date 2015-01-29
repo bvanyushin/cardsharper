@@ -7,5 +7,5 @@ class User < ActiveRecord::Base
 
   validates :email, uniqueness: true
 
-  has_many :cards
+  has_many :cards, dependent: :destroy 
 end

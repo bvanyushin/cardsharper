@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  skip_before_filter :require_login, only: [:index]
+  skip_before_action :require_login, only: [:index]
   def index
     @card = Card.of_user(current_user).relevant_for_today.first
   end
