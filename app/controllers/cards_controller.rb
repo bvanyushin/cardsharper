@@ -2,7 +2,7 @@ class CardsController < ApplicationController
   before_action :find_card, except: [:index, :new, :create]
 
   def index
-    @cards = current_user.cards.all
+    @cards = current_user.cards
   end
 
   def show
