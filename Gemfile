@@ -41,16 +41,17 @@ gem 'pg'
 # task 6 
 group :test do
   gem 'rspec-rails', '~> 3.0'
+
+  # task 7
+  gem 'database_cleaner'
+
+  gem 'capybara', '~> 2.2.0'
+
+  gem 'factory_girl_rails'
+
+  gem 'poltergeist'
+
 end
-
-# task 7
-gem 'database_cleaner'
-
-gem 'capybara', '~> 2.2.0'
-
-gem 'factory_girl_rails'
-
-gem 'poltergeist'
 
 # Task 8
 gem "sorcery"
