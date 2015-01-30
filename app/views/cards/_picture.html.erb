@@ -1,5 +1,5 @@
 <p>
-<% if @card.picture.present? %>
-  <%= image_tag @card.picture.url(:medium) %>
-<% end %>
+  <% if card.picture.present? %>
+    <%=  image_tag card.picture.url(:medium) %>
+  <% end %>
 </p>
