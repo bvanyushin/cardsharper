@@ -1,0 +1,22 @@
+<h1>Список всех колод</h1>
+
+<table id='all-decks-list'>
+  <tr>
+    <th>Название</th>
+    <th>Текущая</th>
+  </tr>
+
+  <% @decks.each do |deck| %>
+    <tr>
+      <td><%= deck.title %></td>
+      <td><%= deck.is_current %></td>
+      <td><%= link_to 'Редактировать', edit_deck_path(deck) %></td>
+      <td>/</td>
+      <td><%= link_to 'Удалить', deck_path(deck), 
+                                 method: :delete, 
+                                 data: { confirm: 'Вы уверены? Все карточке в этой колоде будут удалены.' } %></td>
+    </tr>
+  <% end %>
+</table>
+<br>
+<%= link_to "Добавить колоду", new_deck_path %>
