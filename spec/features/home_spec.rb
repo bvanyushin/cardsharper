@@ -7,7 +7,8 @@ describe "main page tests" do
   let(:second_user) { FactoryGirl.create :user }
   let(:card) { FactoryGirl.create :card, translated_text: " Correct value ",
                                          user_id: user.id,
-                                         deck_id: deck_id }
+                                         deck_id: deck_id 
+             }
   def login_user
     click_link("Войти")
     within("#login-form") do
@@ -117,9 +118,11 @@ describe "main page tests" do
 
   describe "card selection process with current deck chosen" do
     let(:alter_deck) { FactoryGirl.create :deck, title: "alter_title",
-                                                 user_id: user.id }
+                                                 user_id: user.id 
+                     }
 
-    it "displays No Card message when there are no relevant cards in current deck" do
+    it "displays No Card message when there are no cards in current deck and \
+    there are some in other deck" do
       
       @test_deck = FactoryGirl.create :deck, title: "Title", 
                                              user_id: user.id
@@ -134,19 +137,19 @@ describe "main page tests" do
       expect(page).to have_content "Нет карточек для повторения"
     end
 
-    it "displays Card when there are relevant cards to display in current deck" do
+    it "displays Card when there is smthg to display in current deck" do
       
       @test_deck = FactoryGirl.create :deck, title: "Title", 
                                              user_id: user.id
       visit decks_path
       click_link('Сделать текущей')
-      @test_card = FactoryGirl.create :card, original_text: "Правильное значение", 
+      @test_card = FactoryGirl.create :card, original_text: "Текст",
                                              review_date: Date.yesterday,
                                              deck_id: @test_deck.id,
                                              user_id: user.id
       visit root_path
 
-      expect(page).to have_content "Правильное значение"
+      expect(page).to have_content "Текст"
     end
   end
 end
