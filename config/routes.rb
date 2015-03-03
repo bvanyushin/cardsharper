@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   
   post 'logout' => 'user_sessions#destroy'
 
-  put "set_current_deck" => "decks#set_current_deck"
+  put "set_current_deck/:id", to: "decks#set_current_deck", as: "set_current_deck"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

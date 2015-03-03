@@ -5,6 +5,6 @@ class Deck < ActiveRecord::Base
   has_many   :cards, dependent: :destroy
 
   def set_current
-    self.is_current = true
+    update_attributes(is_current: true)
   end
 end

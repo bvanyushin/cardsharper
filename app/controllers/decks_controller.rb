@@ -36,17 +36,21 @@ class DecksController < ApplicationController
   def destroy
     @deck.destroy
 
-    redirect_to decks_path
+    render "index"
   end
 
   def set_current_deck
-    @deck.set_current
+    if params.permit(:id) 
+      find_deck
+      @deck.set_current
+    end
+     redirect_to @deck
   end
 
   private
 
   def deck_params
-    params.require(:deck).permit(:title)
+    params.require(:deck).permit(:title, :is_current)
   end
 
   def find_deck

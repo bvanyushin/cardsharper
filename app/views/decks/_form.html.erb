@@ -19,6 +19,14 @@
     <%= f.text_field :title %>
   </p>
 
+  <% if @deck.is_current %>
+    <%= "Это текущая колода" %>
+  <% else %>
+    <p>
+      <%= f.label "Сделать текущей" %><br>
+      <%= f.check_box :is_current %>
+    </p>
+  <% end %>
   <p>
     <%= f.submit %>
   </p>

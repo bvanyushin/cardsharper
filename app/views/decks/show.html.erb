@@ -2,12 +2,7 @@
   <strong>Название колоды:</strong>
   <%= @deck.title %>
 </p>
-<p>Это
-   <% if !@deck.is_current %> 
-     <%= " не" %> 
-   <% end %>
-    текущая колода
-</p>
-
+<p>Это <%= "не" if !@deck.is_current %> текущая колода</p>
+<br>
 <%= link_to 'Вернуться', decks_path %> |
 <%= link_to 'Редактировать', edit_deck_path(@deck) %>
