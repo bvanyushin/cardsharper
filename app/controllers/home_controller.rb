@@ -2,8 +2,8 @@ class HomeController < ApplicationController
   skip_before_action :require_login, only: [:index]
   def index
     if current_user.present?
-      @deck = current_user.decks.find(current_user.deck_id)
-      if @deck.present?
+      if current_user.deck_id.present?
+        @deck = current_user.decks.find(current_user.deck_id)
         @card = @deck.cards.relevant_for_today.first
       else
         @card = current_user.cards.relevant_for_today.first
