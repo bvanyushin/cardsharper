@@ -50,6 +50,11 @@ describe "main page tests" do
     expect(page).to have_content "Список всех карточек"
   end
 
+  it "opens page containing all decks, after clicking on link 'Все карточки'" do
+    click_link("Все колоды")
+    expect(page).to have_content "Список всех колод"
+  end
+
   describe "card review process" do
     before :each do
       @test_card = FactoryGirl.create :card, original_text: "Правильное значение",
