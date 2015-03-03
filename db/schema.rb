@@ -38,7 +38,6 @@ ActiveRecord::Schema.define(version: 20150303122516) do
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean  "is_current"
   end
 
   add_index "decks", ["user_id"], name: "index_decks_on_user_id", using: :btree
