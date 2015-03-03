@@ -1,5 +1,5 @@
 class CardsController < ApplicationController
-  before_action :find_card,  except: [:index, :new, :create]
+  before_action :find_card, except: [:index, :new, :create]
   before_action :find_decks, only: [:new, :create, :edit, :update]
 
   def index
@@ -43,7 +43,10 @@ class CardsController < ApplicationController
   private
 
   def card_params
-    params.require(:card).permit(:original_text, :translated_text, :picture, :deck_id)
+    params.require(:card).permit(:original_text,
+                                 :translated_text,
+                                 :picture,
+                                 :deck_id)
   end
 
   def find_card

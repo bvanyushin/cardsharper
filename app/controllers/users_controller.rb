@@ -35,7 +35,7 @@ class UsersController < ApplicationController
   end
 
   def set_current_deck
-    if params.permit(:id) 
+    if params.permit(:id)
       @user = User.find(current_user.id)
       @user.set_deck params[:id]
     end
