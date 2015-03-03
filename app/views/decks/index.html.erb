@@ -9,10 +9,15 @@
   <% @decks.each do |deck| %>
     <tr>
       <td><%= deck.title %></td>
-      <td><%= deck.is_current %></td>
       <td><%= link_to 'Редактировать', edit_deck_path(deck) %></td>
       <td>/</td>
-      <td><%= link_to 'Сделать текущей', set_current_deck_path(deck), method: :put %></td>
+      <td>
+        <% if current_user.deck_id == deck.id %>
+          <%= "Текущая колода" %>
+        <% else %>
+          <%= link_to 'Сделать текущей', set_current_deck_path(deck), method: :put %>
+        <% end %>
+      </td>
       <td>/</td>
       <td><%= link_to 'Удалить', deck_path(deck), 
                                  method: :delete, 

@@ -34,9 +34,11 @@ class DecksController < ApplicationController
   end
 
   def destroy
-    @deck.destroy
+    if current_user.deck_id != @deck.id
+      @deck.destroy
+    end
 
-    render "index"
+    redirect_to decks_path
   end
 
   private
