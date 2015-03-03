@@ -34,6 +34,13 @@ class UsersController < ApplicationController
     end
   end
 
+  def set_current_deck
+    if params.permit(:id) 
+      current_user.set_deck params[:id]
+    end
+    redirect_to decks_path
+  end
+
   def destroy
     @user.destroy
     redirect_to root_path

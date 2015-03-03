@@ -39,14 +39,6 @@ class DecksController < ApplicationController
     render "index"
   end
 
-  def set_current_deck
-    if params.permit(:id) 
-      find_deck
-      current_user.set_current_deck(@deck)
-    end
-     redirect_to @deck
-  end
-
   private
 
   def deck_params

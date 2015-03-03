@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
   belongs_to :current_deck
 
-  def set_current_deck(deck)
-    update_attributes(current_deck: deck)
+  def set_deck id_deck
+    update_attributes(deck_id: id_deck)
   end
 end
