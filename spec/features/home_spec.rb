@@ -3,9 +3,11 @@ require "rails_helper"
 describe "main page tests" do
   let(:user) { FactoryGirl.create :user, email: "unique@example.com",
                                          password: "password" }
+  let(:deck) { FactoryGirl.create :deck, title: "title" }
   let(:second_user) { FactoryGirl.create :user }
   let(:card) { FactoryGirl.create :card, translated_text: " Correct value ",
-                                         user_id: user.id }
+                                         user_id: user.id,
+                                         deck_id: deck_id }
   def login_user
     click_link("Войти")
     within("#login-form") do
@@ -52,6 +54,7 @@ describe "main page tests" do
     before :each do
       @test_card = FactoryGirl.create :card, original_text: "Правильное значение",
                                              translated_text: "Correct value",
+                                             deck_id: deck.id,
                                              user_id: user.id
       visit root_path
     end
@@ -86,6 +89,7 @@ describe "main page tests" do
     it "displays a relevant card when there is one" do
       @test_card = FactoryGirl.create :card, original_text: "Правильное значение", 
                                              review_date: Date.yesterday,
+                                             deck_id: deck.id,
                                              user_id: user.id
       visit root_path
       expect(page).to have_content "Правильное значение"
@@ -93,12 +97,14 @@ describe "main page tests" do
 
     it "selects only relevant cards to display" do
       @test_card = FactoryGirl.create :card, review_date: Date.tomorrow,
+                                             deck_id: deck.id,
                                              user_id: user.id
       expect(page).to have_content "Нет карточек для повторения"
     end
 
     it "Doesn`t show cards of other user" do
       @test_card = FactoryGirl.create :card, review_date: Date.today,
+                                             deck_id: deck.id,
                                              user_id: second_user.id
       expect(page).to have_content "Нет карточек для повторения"
     end
