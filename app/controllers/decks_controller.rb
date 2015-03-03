@@ -42,7 +42,7 @@ class DecksController < ApplicationController
   def set_current_deck
     if params.permit(:id) 
       find_deck
-      @deck.set_current
+      current_user.set_current_deck(@deck)
     end
      redirect_to @deck
   end
@@ -50,7 +50,7 @@ class DecksController < ApplicationController
   private
 
   def deck_params
-    params.require(:deck).permit(:title, :is_current)
+    params.require(:deck).permit(:title)
   end
 
   def find_deck
