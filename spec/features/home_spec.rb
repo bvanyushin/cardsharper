@@ -2,13 +2,14 @@ require "rails_helper"
   
 describe "main page tests" do
   let(:user) { FactoryGirl.create :user, email: "unique@example.com",
-                                         password: "password" }
+                                         password: "password"
+  }
   let(:deck) { FactoryGirl.create :deck, title: "title" }
   let(:second_user) { FactoryGirl.create :user }
   let(:card) { FactoryGirl.create :card, translated_text: " Correct value ",
                                          user_id: user.id,
-                                         deck_id: deck_id 
-             }
+                                         deck_id: deck_id
+  }
   def login_user
     click_link("Войти")
     within("#login-form") do
@@ -119,7 +120,7 @@ describe "main page tests" do
   describe "card selection process with current deck chosen" do
     let(:alter_deck) { FactoryGirl.create :deck, title: "alter_title",
                                                  user_id: user.id 
-                     }
+    }
 
     it "displays No Card message when there are no cards in current deck and \
     there are some in other deck" do
@@ -128,7 +129,7 @@ describe "main page tests" do
                                              user_id: user.id
       visit decks_path
       click_link('Сделать текущей')
-      @test_card = FactoryGirl.create :card, original_text: "Правильное значение", 
+      @test_card = FactoryGirl.create :card, original_text: "Текст", 
                                              review_date: Date.yesterday,
                                              deck_id: alter_deck.id,
                                              user_id: user.id
