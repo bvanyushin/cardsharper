@@ -124,7 +124,6 @@ describe "main page tests" do
 
     it "displays No Card message when there are no cards in current deck and \
     there are some in other deck" do
-
       @test_deck = FactoryGirl.create :deck, title: "Title",
                                              user_id: user.id
       visit decks_path
