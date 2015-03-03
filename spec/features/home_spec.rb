@@ -124,12 +124,12 @@ describe "main page tests" do
 
     it "displays No Card message when there are no cards in current deck and \
     there are some in other deck" do
-      
-      @test_deck = FactoryGirl.create :deck, title: "Title", 
+
+      @test_deck = FactoryGirl.create :deck, title: "Title",
                                              user_id: user.id
       visit decks_path
       click_link('Сделать текущей')
-      @test_card = FactoryGirl.create :card, original_text: "Текст", 
+      @test_card = FactoryGirl.create :card, original_text: "Текст",
                                              review_date: Date.yesterday,
                                              deck_id: alter_deck.id,
                                              user_id: user.id
@@ -139,8 +139,7 @@ describe "main page tests" do
     end
 
     it "displays Card when there is smthg to display in current deck" do
-      
-      @test_deck = FactoryGirl.create :deck, title: "Title", 
+      @test_deck = FactoryGirl.create :deck, title: "Title",
                                              user_id: user.id
       visit decks_path
       click_link('Сделать текущей')
