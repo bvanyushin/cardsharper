@@ -76,7 +76,7 @@ describe "main page tests" do
     end
   end
 
-  describe "card selection process" do
+  describe "card selection process with no current deck chosen" do
     after :each do
       DatabaseCleaner.clean
     end
@@ -107,6 +107,41 @@ describe "main page tests" do
                                              deck_id: deck.id,
                                              user_id: second_user.id
       expect(page).to have_content "Нет карточек для повторения"
+    end
+  end
+
+  describe "card selection process with current deck chosen" do
+    let(:alter_deck) { FactoryGirl.create :deck, title: "alter_title",
+                                                 user_id: user.id }
+
+    it "displays No Card message when there are no relevant cards in current deck" do
+      
+      @test_deck = FactoryGirl.create :deck, title: "Title", 
+                                             user_id: user.id
+      visit decks_path
+      click_link('Сделать текущей')
+      @test_card = FactoryGirl.create :card, original_text: "Правильное значение", 
+                                             review_date: Date.yesterday,
+                                             deck_id: alter_deck.id,
+                                             user_id: user.id
+      visit root_path
+
+      expect(page).to have_content "Нет карточек для повторения"
+    end
+
+    it "displays Card when there are relevant cards to display in current deck" do
+      
+      @test_deck = FactoryGirl.create :deck, title: "Title", 
+                                             user_id: user.id
+      visit decks_path
+      click_link('Сделать текущей')
+      @test_card = FactoryGirl.create :card, original_text: "Правильное значение", 
+                                             review_date: Date.yesterday,
+                                             deck_id: @test_deck.id,
+                                             user_id: user.id
+      visit root_path
+
+      expect(page).to have_content "Правильное значение"
     end
   end
 end
