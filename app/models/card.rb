@@ -6,7 +6,7 @@ class Card < ActiveRecord::Base
   before_validation :set_review_date
 
   validates_attachment_content_type :picture, content_type: /\Aimage\/.*\Z/
-  validates :translated_text, :original_text, :review_date,
+  validates :translated_text, :original_text, :review_date, :deck_id,
             presence: true
   validates_with CardTextFieldsDifferenceValidator
 

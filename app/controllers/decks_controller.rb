@@ -39,14 +39,17 @@ class DecksController < ApplicationController
     redirect_to decks_path
   end
 
+  def set_current_deck
+    @deck.set_current
+  end
+
   private
 
   def deck_params
-    params.require(:deck).permit(:title, :is_current)
+    params.require(:deck).permit(:title)
   end
 
   def find_deck
     @deck = current_user.decks.find(params[:id])
   end
-
 end

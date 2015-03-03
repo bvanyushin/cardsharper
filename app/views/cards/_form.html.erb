@@ -27,6 +27,11 @@
   <p>
     <%= f.file_field :picture %>
   </p>
+  
+  <p>
+    <%= f.collection_select(:deck_id, @decks, :id, :title) %>
+  </p>
+
   <p>
     <%= f.submit %>
   </p>
