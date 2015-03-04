@@ -34,10 +34,9 @@ class UsersController < ApplicationController
     end
   end
 
-  def set_current_deck
-    if params.permit(:id)
-      @user = User.find(current_user.id)
-      @user.set_deck params[:id]
+  def set_current_deck_id
+    if params.permit(:current_deck_id)
+      current_user.set_deck params[:id]
     end
     redirect_to decks_path
   end

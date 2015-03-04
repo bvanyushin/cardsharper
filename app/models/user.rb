@@ -1,18 +1,23 @@
 class User < ActiveRecord::Base
   authenticates_with_sorcery!
 
-  validates :password, length: { minimum: 3 }
-  validates :password, confirmation: true
-  validates :password_confirmation, presence: true
+  validates :password, length: { minimum: 3 }, if: "new_record? || password.present?"
+  validates :password, confirmation: true,     if: "new_record? || password.present?"
+  validates :password_confirmation, presence: true, if: "new_record? || password.present?"
 
   validates :email, uniqueness: true
 
   has_many :cards, dependent: :destroy
   has_many :decks, dependent: :destroy
 
-  belongs_to :current_deck
+  belongs_to :current_deck, class_name: "Deck",
+                            foreign_key: "current_deck_id"
 
-  def set_deck(id_deck)
-    update_attribute(:deck_id, id_deck)
+  def set_deck(id)
+    update_attributes!(current_deck_id: id)
+  end
+
+  def current_deck
+    self.deck_id
   end
 end
