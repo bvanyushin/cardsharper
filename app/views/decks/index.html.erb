@@ -18,7 +18,7 @@
         <% end %>
       </td>
       <td>/</td>
-      <td><% if !deck.current? current_user %>
+      <td><% if !deck.current?%>
           <%= link_to 'Удалить', deck_path(deck), 
                                  method: :delete, 
                                  data: { confirm: 'Вы уверены? Все карточки в этой колоде будут удалены.' } %>
