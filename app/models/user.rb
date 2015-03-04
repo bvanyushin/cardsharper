@@ -18,6 +18,6 @@ class User < ActiveRecord::Base
   end
 
   def current_deck
-    self.deck_id
+    current_deck_id
   end
 end

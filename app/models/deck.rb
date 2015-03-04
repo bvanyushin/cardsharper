@@ -4,7 +4,7 @@ class Deck < ActiveRecord::Base
 
   has_many :cards, dependent: :destroy
 
-  def current? user_id
-    return self.id == user.current_deck_id
+  def current? user
+    self.id == user.current_deck_id
   end
 end
