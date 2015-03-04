@@ -29,7 +29,7 @@
   </p>
   
   <p>
-    <%= f.collection_select(:deck_id, @decks, :id, :title) %>
+    <%= f.collection_select(:deck_id, current_user.decks, :id, :title) %>
   </p>
 
   <p>

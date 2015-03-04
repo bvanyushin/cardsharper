@@ -16,8 +16,4 @@ class User < ActiveRecord::Base
   def set_deck(id)
     update_attributes!(current_deck_id: id)
   end
-
-  def current_deck
-    current_deck_id
-  end
 end

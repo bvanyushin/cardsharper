@@ -1,6 +1,5 @@
 class CardsController < ApplicationController
   before_action :find_card, except: [:index, :new, :create]
-  before_action :find_decks, only: [:new, :create, :edit, :update]
 
   def index
     @cards = current_user.cards
@@ -51,9 +50,5 @@ class CardsController < ApplicationController
 
   def find_card
     @card = current_user.cards.find(params[:id])
-  end
-
-  def find_decks
-    @decks = current_user.decks
   end
 end

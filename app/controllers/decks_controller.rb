@@ -36,10 +36,7 @@ class DecksController < ApplicationController
   def destroy
     unless @deck.current?
       @deck.destroy
-      redirect_to decks_path
-      return
     end
-    flash[:deck_message] = "Нельзя удалить текущую колоду. Для удаления назначьте другую колоду текущей."
     redirect_to decks_path
   end
 
