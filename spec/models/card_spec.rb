@@ -5,7 +5,7 @@ describe Card do
   let(:deck) { FactoryGirl.create :deck, title: "title" }
   let(:card) { FactoryGirl.create :card, translated_text: " Correct value ",
                                          user_id: user.id,
-                                         deck_id: deck.id 
+                                         deck_id: deck.id
   }
 
   it "checks for correct translation without capitalization, leading and trailing spaces" do
