@@ -14,6 +14,10 @@ class User < ActiveRecord::Base
                             foreign_key: "current_deck_id"
 
   def set_deck(id)
-    update_attributes!(current_deck_id: id)
+    if valid?
+      update_attributes(current_deck_id: id)
+    else
+      flash[:message] = "Невозможно выполнить операцию. Некорректный пользователь."
+    end
   end
 end

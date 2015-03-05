@@ -1,7 +1,7 @@
 <h1>Список всех колод</h1>
 
 <table id='all-decks-list'>
-  <p><%= flash[:deck_message] %></p>
+  <p><%= flash[:message] %></p>
   <tr>
     <th>Название колоды</th>
   </tr>
@@ -12,14 +12,14 @@
       <td><%= link_to 'Редактировать', edit_deck_path(deck) %></td>
       <td>/</td>
       <td>
-        <% if current_user.current_deck_id == deck.id %>
+        <% if current_user.current_deck == deck %>
           <%= "Текущая колода" %>
         <% else %>
           <%= link_to "Сделать текущей", set_current_deck_path(deck), method: :put %>
         <% end %>
       </td>
       <td>/</td>
-      <td><% if !deck.current?%>
+      <td><% if !deck.current? %>
           <%= link_to 'Удалить', deck_path(deck), 
                                  method: :delete, 
                                  data: { confirm: 'Вы уверены? Все карточки в этой колоде будут удалены.' } %>
