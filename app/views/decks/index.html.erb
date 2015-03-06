@@ -15,7 +15,8 @@
         <% if current_user.current_deck == deck %>
           <%= "Текущая колода" %>
         <% else %>
-          <%= link_to "Сделать текущей", set_current_deck_path(deck), method: :put %>
+          <% current_deck_id = deck.id %>
+          <%= link_to "Сделать текущей", set_current_deck_profile_path(current_deck_id: deck.id), method: :put %>
         <% end %>
       </td>
       <td>/</td>

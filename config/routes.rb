@@ -21,14 +21,21 @@ Rails.application.routes.draw do
 
   resources :decks
 
+  # resource
+
   put "review_card" => "home#review_card"
 
   get 'login' => 'user_sessions#new'
   
   post 'logout' => 'user_sessions#destroy'
 
-  put "set_current_deck/:id", to: "users#set_current_deck", as: "set_current_deck"
+  resource :profile do 
+    member do
+      put "set_current_deck" => "members#set_current_deck"
+    end
+  end
 
+  # put "set_current_deck" => "users#set_current_deck"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
