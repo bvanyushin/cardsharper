@@ -29,13 +29,12 @@ Rails.application.routes.draw do
   
   post 'logout' => 'user_sessions#destroy'
 
-  resource :profile do 
+  resource :profile do
     member do
       put "set_current_deck" => "members#set_current_deck"
     end
   end
 
-  # put "set_current_deck" => "users#set_current_deck"
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 
