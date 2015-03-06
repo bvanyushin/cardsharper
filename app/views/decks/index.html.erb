@@ -21,8 +21,8 @@
       </td>
       <td>/</td>
       <td><% if !deck.current? %>
-          <%= link_to 'Удалить', deck_path(deck), 
-                                 method: :delete, 
+          <%= link_to 'Удалить', deck_path(deck),
+                                 method: :delete,
                                  data: { confirm: 'Вы уверены? Все карточки в этой колоде будут удалены.' } %>
           <% else %>
             <%= "Нельзя удалить текущую колоду." %>

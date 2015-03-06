@@ -34,9 +34,9 @@ class DecksController < ApplicationController
   end
 
   def destroy
-    unless @deck.current?
+    # unless @deck.current?
       @deck.destroy
-    end
+    # end
     redirect_to decks_path
   end
 

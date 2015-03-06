@@ -1,4 +1,4 @@
-class MembersController < ApplicationController
+class ProfilesController < ApplicationController
   def set_current_deck
     unless current_user.set_deck(deck_params)
       flash[:deck_message] = "Something wrong happened."

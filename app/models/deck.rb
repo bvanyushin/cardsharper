@@ -4,6 +4,8 @@ class Deck < ActiveRecord::Base
 
   has_many :cards, dependent: :destroy
 
+  before_destroy "!current?"
+
   def current?
     user.current_deck == self
   end

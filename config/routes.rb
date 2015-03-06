@@ -31,7 +31,7 @@ Rails.application.routes.draw do
 
   resource :profile do
     member do
-      put "set_current_deck" => "members#set_current_deck"
+      put "set_current_deck"
     end
   end
 
