@@ -1,9 +1,7 @@
 require "rails_helper"
-  
+
 describe "list of decks page tests" do
-  let(:user) { FactoryGirl.create :user, email: "unique@example.com",
-                                         password: "password"
-  }
+  let(:user) { FactoryGirl.create :user, password: "password" }
   let(:deck) { FactoryGirl.create :deck, title: "title" }
 
   def login_user
