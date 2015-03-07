@@ -21,8 +21,6 @@ Rails.application.routes.draw do
 
   resources :decks
 
-  # resource
-
   put "review_card" => "home#review_card"
 
   get 'login' => 'user_sessions#new'

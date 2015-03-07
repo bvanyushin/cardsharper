@@ -10,5 +10,6 @@ class ProfilesController < ApplicationController
 
   def deck_params
     params.permit(:current_deck_id)
+    params[:current_deck_id]
   end
 end

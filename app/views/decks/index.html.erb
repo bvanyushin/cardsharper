@@ -11,23 +11,21 @@
       <td><%= deck.title %></td>
       <td><%= link_to 'Редактировать', edit_deck_path(deck) %></td>
       <td>/</td>
-      <td>
-        <% if current_user.current_deck == deck %>
-          <%= "Текущая колода" %>
-        <% else %>
-          <% current_deck_id = deck.id %>
+      <% if deck.current? %>
+        <td>Текущая колода</td>
+        <td>/</td>
+        <td>Нельзя удалить текущую колоду.</td>
+      <% else %>
+        <td>
           <%= link_to "Сделать текущей", set_current_deck_profile_path(current_deck_id: deck.id), method: :put %>
-        <% end %>
-      </td>
-      <td>/</td>
-      <td><% if !deck.current? %>
+        </td>
+        <td>/</td>
+        <td>
           <%= link_to 'Удалить', deck_path(deck),
                                  method: :delete,
                                  data: { confirm: 'Вы уверены? Все карточки в этой колоде будут удалены.' } %>
-          <% else %>
-            <%= "Нельзя удалить текущую колоду." %>
-          <% end %>
-      </td>
+        </td>
+      <% end %>
     </tr>
   <% end %>
 </table>

@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
   belongs_to :current_deck, class_name: "Deck",
                             foreign_key: "current_deck_id"
 
-  def set_deck(params)
-    update_attributes(current_deck_id: params[:current_deck_id])
+  def set_deck(deck_id)
+    update_attributes(current_deck_id: deck_id)
   end
 end

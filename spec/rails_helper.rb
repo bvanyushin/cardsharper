@@ -8,6 +8,8 @@ require 'factory_girl_rails'
 require 'database_cleaner'
 require 'capybara/poltergeist'
 
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+
 DatabaseCleaner.strategy = :truncation
 
 Capybara.javascript_driver = :poltergeist
