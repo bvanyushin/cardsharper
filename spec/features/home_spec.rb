@@ -10,18 +10,9 @@ describe "main page tests" do
                                          user_id: user.id,
                                          deck_id: deck_id
   }
-  def login_user
-    click_link("Войти")
-    within("#login-form") do
-      fill_in "email", with: user.email
-      fill_in "password", with: "password"
-    end
-    click_button "Войти"
-  end
-
+  
   before :each do
-    visit root_path
-    login_user
+    login_user(user.email, "password")
   end
 
   it "displays successfully login message" do
@@ -35,7 +26,7 @@ describe "main page tests" do
 
   it "edit profile link works" do 
     click_link("Редактировать профиль")
-    expect(page).to have_content "Editing User"
+    expect(page).to have_content "Editing profile"
   end
 
   it "Redirects to source page after login" do

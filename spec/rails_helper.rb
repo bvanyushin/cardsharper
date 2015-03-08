@@ -8,8 +8,6 @@ require 'factory_girl_rails'
 require 'database_cleaner'
 require 'capybara/poltergeist'
 
-Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
-
 DatabaseCleaner.strategy = :truncation
 
 Capybara.javascript_driver = :poltergeist
@@ -29,7 +27,7 @@ Capybara.javascript_driver = :poltergeist
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
 # require only the support files necessary.
 #
-# Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
+Dir[Rails.root.join("spec/support/**/*.rb")].each { |f| require f }
 
 # Checks for pending migrations before tests are run.
 # If you are not using ActiveRecord, you can remove this line.

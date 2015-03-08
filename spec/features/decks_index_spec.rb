@@ -5,8 +5,7 @@ describe "list of decks page tests" do
   let(:deck) { FactoryGirl.create :deck, title: "title" }
 
   before :each do
-    visit root_path
-    LoginMacros.login_user
+    login_user(user.email, "password")
     visit decks_path
   end
 

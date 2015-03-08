@@ -13,9 +13,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def edit
-  end
-
   def create
     @user = User.new(user_params)
     if @user.save
@@ -23,14 +20,6 @@ class UsersController < ApplicationController
       redirect_to root_path, notice: "User was successfully created."
     else
       render action: 'new'
-    end
-  end
-
-  def update
-    if @user.update(user_params)
-      redirect_to @user, notice: "User was successfully updated."
-    else
-      render action: 'edit'
     end
   end
 
