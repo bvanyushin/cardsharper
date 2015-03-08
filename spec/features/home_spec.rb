@@ -116,7 +116,7 @@ describe "main page tests" do
       @test_deck = FactoryGirl.create :deck, title: "Title",
                                              user_id: user.id
       visit decks_path
-      click_link('Сделать текущей')
+      click_link("Сделать текущей")
       @test_card = FactoryGirl.create :card, original_text: "Текст",
                                              review_date: Date.yesterday,
                                              deck_id: alter_deck.id,

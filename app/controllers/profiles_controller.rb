@@ -7,6 +7,7 @@ class ProfilesController < ApplicationController
   end
 
   def edit
+    @profile = current_user
   end
 
   def update
@@ -25,6 +26,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:current_user).permit(:email, :password, :password_confirmation)
+    params.require(:profile).permit(:email, :password, :password_confirmation)
   end
 end
