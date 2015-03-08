@@ -7,7 +7,7 @@
         <li><%= link_to "Все колоды",            decks_path %></li>
         <li><%= link_to "Все карточки",          cards_path %></li>
         <li><%= link_to "Добавить карточку",     new_card_path %></li>
-        <li><%= link_to "Редактировать профиль", edit_profile_path(id: current_user.id) %></li>
+        <li><%= link_to "Редактировать профиль", edit_profile_path %></li>
         <li><%= link_to "Выйти", logout_path, method: :post %></li>
       </ul>
     <% else %>

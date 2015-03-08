@@ -1,6 +1,4 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit, :update, :destroy]
-
   def set_current_deck
     unless current_user.set_deck(deck_params)
       flash[:deck_message] = "Something wrong happened."
@@ -12,8 +10,8 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    if @profile.update(profile_params)
-      redirect_to @profile, notice: "User was successfully updated."
+    if current_user.update(profile_params)
+      redirect_to current_user, notice: "User was successfully updated."
     else
       render action: "edit"
     end
@@ -27,10 +25,6 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:email, :password, :password_confirmation)
-  end
-
-  def set_profile
-    @profile = current_user
+    params.require(:current_user).permit(:email, :password, :password_confirmation)
   end
 end
