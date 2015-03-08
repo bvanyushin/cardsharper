@@ -15,7 +15,7 @@ class ProfilesController < ApplicationController
     if @profile.update(profile_params)
       redirect_to @profile, notice: "User was successfully updated."
     else
-      render action: 'edit'
+      render action: "edit"
     end
   end
 

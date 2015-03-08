@@ -10,7 +10,7 @@ describe "main page tests" do
                                          user_id: user.id,
                                          deck_id: deck_id
   }
-  
+
   before :each do
     login_user(user.email, "password")
   end
