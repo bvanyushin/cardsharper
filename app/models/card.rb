@@ -17,24 +17,44 @@ class Card < ActiveRecord::Base
 
   def review(user_answer)
     if translated_text.mb_chars.strip.downcase == user_answer.mb_chars.strip.downcase
-      attempt_count += 1
-      failed_attempt_count = 0
-      # Case Block to set value of addition
-      update_attributes(review_date: Date.today + addition)
-      return true
+      correct_answer_handler
     else
-      failed_attempt_count += 1
-      if failed_attempt_count >= 3 
-        attempt_count = 1
-        failed_attempt_count = 0
-      end
-      return false
+      wrong_answer_handler
     end
   end
 
   private
 
   def set_review_date
-    self.review_date ||= Date.today
+    self.review_date ||= Time.now
+  end
+
+  def correct_answer_handler
+    self.attempt_count += 1
+    self.failed_attempt_count = 0
+    case self.attempt_count
+    when 1
+      addition = 12.hours
+    when 2
+      addition = 3.days
+    when 3
+      addition = 7.days
+    when 4
+      addition = 14.days
+    else
+      addition = 1.month
+    end
+    update_attributes(review_date: Time.now + addition)
+    return true
+  end
+
+  def wrong_answer_handler
+    self.failed_attempt_count += 1
+    if self.failed_attempt_count >= 3 
+      self.attempt_count = 0
+      self.failed_attempt_count = 0
+      update_attributes(review_date: Time.now + 12.hours)
+    end
+    return false
   end
 end
