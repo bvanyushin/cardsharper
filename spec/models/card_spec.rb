@@ -23,12 +23,6 @@ describe Card do
       expect(card.attempt_count).to eql 1
     end
 
-    it "moves the review date if answer is correct for dates in past" do
-      card.review_date = Date.yesterday
-      card.review("Correct value")
-      expect(card.review_date).not_to eql Date.yesterday
-    end
-
     it "nullify fail attempts counter if answer is correct" do
       card.failed_attempt_count = 2
       card.review("Correct value")
@@ -64,6 +58,13 @@ describe Card do
     describe "moves review_date for correct answer for" do
       it "12 hours from now if this is first review" do
         card.review_date = Date.today
+        card.attempt_count = 0
+        card.review("Correct value")
+        expect(card.review_date).to be_within(20.seconds).of(Time.now + 12.hours)
+      end
+
+      it "12 hours from now if this is first review and previous date was in past" do
+        card.review_date = Date.today - 1.year
         card.attempt_count = 0
         card.review("Correct value")
         expect(card.review_date).to be_within(20.seconds).of(Time.now + 12.hours)
