@@ -45,16 +45,16 @@ class Card < ActiveRecord::Base
       addition = 1.month
     end
     update_attributes(review_date: Time.now + addition)
-    return true
+    true
   end
 
   def wrong_answer_handler
     self.failed_attempt_count += 1
-    if self.failed_attempt_count >= 3 
+    if self.failed_attempt_count >= 3
       self.attempt_count = 0
       self.failed_attempt_count = 0
       update_attributes(review_date: Time.now + 12.hours)
     end
-    return false
+    false
   end
 end
