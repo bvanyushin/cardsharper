@@ -16,10 +16,18 @@ class Card < ActiveRecord::Base
   scope :relevant_for_today, -> { where("review_date <= ?", Time.now).order("RANDOM()") }
 
   def review(user_answer)
-    if translated_text.strip.downcase == user_answer.strip.downcase
-      update_attributes(review_date: Date.today + 3.day)
+    if translated_text.mb_chars.strip.downcase == user_answer.mb_chars.strip.downcase
+      attempt_count += 1
+      failed_attempt_count = 0
+      # Case Block to set value of addition
+      update_attributes(review_date: Date.today + addition)
       return true
     else
+      failed_attempt_count += 1
+      if failed_attempt_count >= 3 
+        attempt_count = 1
+        failed_attempt_count = 0
+      end
       return false
     end
   end
