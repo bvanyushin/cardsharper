@@ -29,14 +29,14 @@ class Card < ActiveRecord::Base
     self.review_date ||= Time.now
   end
 
-  def percolate_text str
+  def percolate_text(str)
     str.mb_chars.strip.downcase
   end
 
   def handle_correct_answer
     self.attempt_count += 1
     self.failed_attempt_count = 0
-    addition = 
+    addition =
     case self.attempt_count
     when 1
       12.hours
