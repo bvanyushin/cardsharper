@@ -16,10 +16,10 @@ class Card < ActiveRecord::Base
   scope :relevant_for_today, -> { where("review_date <= ?", Time.now).order("RANDOM()") }
 
   def review(user_answer)
-    if translated_text.mb_chars.strip.downcase == user_answer.mb_chars.strip.downcase
-      correct_answer_handler
+    if percolate_text(translated_text) == percolate_text(user_answer)
+      handle_correct_answer
     else
-      wrong_answer_handler
+      handle_wrong_answer
     end
   end
 
@@ -29,26 +29,31 @@ class Card < ActiveRecord::Base
     self.review_date ||= Time.now
   end
 
-  def correct_answer_handler
+  def percolate_text str
+    str.mb_chars.strip.downcase
+  end
+
+  def handle_correct_answer
     self.attempt_count += 1
     self.failed_attempt_count = 0
+    addition = 
     case self.attempt_count
     when 1
-      addition = 12.hours
+      12.hours
     when 2
-      addition = 3.days
+      3.days
     when 3
-      addition = 7.days
+      7.days
     when 4
-      addition = 14.days
+      14.days
     else
-      addition = 1.month
+      1.month
     end
     update_attributes(review_date: Time.now + addition)
     true
   end
 
-  def wrong_answer_handler
+  def handle_wrong_answer
     self.failed_attempt_count += 1
     if self.failed_attempt_count >= 3
       self.attempt_count = 0
