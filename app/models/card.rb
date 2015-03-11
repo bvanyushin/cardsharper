@@ -42,7 +42,7 @@ class Card < ActiveRecord::Base
                when 2 then 3.days
                when 3 then 7.days
                when 4 then 14.days
-               else 
+               else
                  1.month
                end
     update_attributes(review_date: Time.now + addition,
