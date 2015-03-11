@@ -27,8 +27,6 @@ class Card < ActiveRecord::Base
 
   def set_review_date
     self.review_date ||= Time.now
-    self.attempt_count ||= 0
-    self.failed_attempt_count ||= 0
   end
 
   def percolate_text(str)
@@ -36,10 +34,10 @@ class Card < ActiveRecord::Base
   end
 
   def handle_correct_answer
-    increment(attempt_count)
-    addition = case self.attempt_count
+    increment(:attempt_count)
+    addition = case attempt_count
                when 1
-                12.hours
+                 12.hours
                when 2
                  3.days
                when 3
@@ -54,7 +52,8 @@ class Card < ActiveRecord::Base
   end
 
   def handle_wrong_answer
-    if (self.failed_attempt_count += 1) >= 3
+    increment(:failed_attempt_count)
+    if failed_attempt_count >= 3
       update_attributes(review_date:   Time.now + 12.hours,
                         attempt_count: 0,
                         failed_attempt_count: 0)
