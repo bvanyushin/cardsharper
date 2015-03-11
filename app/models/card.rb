@@ -18,8 +18,10 @@ class Card < ActiveRecord::Base
   def review(user_answer)
     if percolate_text(translated_text) == percolate_text(user_answer)
       handle_correct_answer
+      true
     else
       handle_wrong_answer
+      false
     end
   end
 
@@ -36,17 +38,13 @@ class Card < ActiveRecord::Base
   def handle_correct_answer
     increment(:attempt_count)
     addition = case attempt_count
-               when 1
-                 12.hours
-               when 2
-                 3.days
-               when 3
-                 7.days
-               when 4
-                 14.days
-               else
+               when 1 then 12.hours
+               when 2 then 3.days
+               when 3 then 7.days
+               when 4 then 14.days
+               else 
                  1.month
-              end
+               end
     update_attributes(review_date: Time.now + addition,
                       failed_attempt_count: 0)
   end
@@ -58,6 +56,5 @@ class Card < ActiveRecord::Base
                         attempt_count: 0,
                         failed_attempt_count: 0)
     end
-    false
   end
 end
