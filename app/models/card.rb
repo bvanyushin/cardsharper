@@ -34,7 +34,7 @@ class Card < ActiveRecord::Base
   end
 
   def handle_correct_answer
-    increment(attempt_count, 1)
+    self.attempt_count += 1
     addition = case self.attempt_count
                when 1
                 12.hours
