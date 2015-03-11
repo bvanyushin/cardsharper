@@ -34,31 +34,28 @@ class Card < ActiveRecord::Base
   end
 
   def handle_correct_answer
-    self.attempt_count += 1
-    self.failed_attempt_count = 0
-    addition =
-    case self.attempt_count
-    when 1
-      12.hours
-    when 2
-      3.days
-    when 3
-      7.days
-    when 4
-      14.days
-    else
-      1.month
-    end
-    update_attributes(review_date: Time.now + addition)
-    true
+    increment(attempt_count, 1)
+    addition = case self.attempt_count
+               when 1
+                12.hours
+               when 2
+                 3.days
+               when 3
+                 7.days
+               when 4
+                 14.days
+               else
+                 1.month
+              end
+    update_attributes(review_date: Time.now + addition,
+                      failed_attempt_count: 0)
   end
 
   def handle_wrong_answer
-    self.failed_attempt_count += 1
-    if self.failed_attempt_count >= 3
-      self.attempt_count = 0
-      self.failed_attempt_count = 0
-      update_attributes(review_date: Time.now + 12.hours)
+    if (self.failed_attempt_count += 1) >= 3
+      update_attributes(review_date:   Time.now + 12.hours,
+                        attempt_count: 0,
+                        failed_attempt_count: 0)
     end
     false
   end

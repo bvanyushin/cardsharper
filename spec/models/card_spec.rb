@@ -23,6 +23,13 @@ describe Card do
       expect(card.attempt_count).to eql 1
     end
 
+    it "doesn't increment attempt counter if it is first wrong answer" do
+      card.attempt_count = 0
+      card.failed_attempt_count = 0
+      card.review("Incorrect")
+      expect(card.attempt_count).to eql 0
+    end
+
     it "nullify fail attempts counter if answer is correct" do
       card.failed_attempt_count = 2
       card.review("Correct value")
