@@ -54,7 +54,7 @@ class Card < ActiveRecord::Base
   def handle_wrong_answer
     increment(:failed_attempt_count)
     if failed_attempt_count >= 3
-      update_attributes(review_date:   Time.now + 12.hours,
+      update_attributes(review_date: Time.now + 12.hours,
                         attempt_count: 0,
                         failed_attempt_count: 0)
     end
