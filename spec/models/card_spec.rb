@@ -9,12 +9,12 @@ describe Card do
   }
 
   describe "review process" do
-    it "checks for correct translation without capitalization, leading and trailing spaces" do
-      expect(card.review("  Correct vaLUe")).to be true
-    end
-
     it "checks for correct translation" do
       expect(card.review("Incorrect value")).to be false
+    end
+
+    it "isn't misled by capitalization, leading and trailing spaces" do
+      expect(card.review("  Correct vaLUe")).to be true
     end
 
     it "allows 1 typo" do
