@@ -8,15 +8,19 @@ describe Card do
                                          deck_id: deck.id
   }
 
-  it "checks for correct translation without capitalization, leading and trailing spaces" do
-    expect(card.review("  Correct vaLUe")).to be true
-  end
-
-  it "checks for correct translation" do
-    expect(card.review("Incorrect value")).to be false
-  end
-
   describe "review process" do
+    it "checks for correct translation without capitalization, leading and trailing spaces" do
+      expect(card.review("  Correct vaLUe")).to be true
+    end
+
+    it "checks for correct translation" do
+      expect(card.review("Incorrect value")).to be false
+    end
+
+    it "allows 1 typo" do
+      expect(card.review("correct vale")).to be true
+    end
+
     it "increment attempt counter if answer is correct" do
       card.attempt_count = 0
       card.review("Correct value")

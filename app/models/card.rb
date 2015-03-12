@@ -16,7 +16,10 @@ class Card < ActiveRecord::Base
   scope :relevant_for_today, -> { where("review_date <= ?", Time.now).order("RANDOM()") }
 
   def review(user_answer)
-    if percolate_text(translated_text) == percolate_text(user_answer)
+    typos_allowed = 1
+    reference = percolate_text(translated_text).to_s
+    answer = percolate_text(user_answer).to_s
+    if Levenshtein.distance(reference, answer) <= typos_allowed
       handle_correct_answer
       true
     else
