@@ -1,4 +1,6 @@
 class Card < ActiveRecord::Base
+  TYPOS_ALLOWED = 1
+  
   has_attached_file :picture,
                     styles: { medium: "360x360>" },
                     default_url: "/images/:style/missing.png"
@@ -16,10 +18,9 @@ class Card < ActiveRecord::Base
   scope :relevant_for_today, -> { where("review_date <= ?", Time.now).order("RANDOM()") }
 
   def review(user_answer)
-    typos_allowed = 1
-    reference = percolate_text(translated_text).to_s
-    answer = percolate_text(user_answer).to_s
-    if Levenshtein.distance(reference, answer) <= typos_allowed
+    reference = percolate_text(translated_text)
+    answer = percolate_text(user_answer)
+    if Levenshtein.distance(reference, answer) <= TYPOS_ALLOWED
       handle_correct_answer
       true
     else
@@ -35,7 +36,7 @@ class Card < ActiveRecord::Base
   end
 
   def percolate_text(str)
-    str.mb_chars.strip.downcase
+    str.mb_chars.strip.downcase.to_s
   end
 
   def handle_correct_answer
