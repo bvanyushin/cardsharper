@@ -63,11 +63,14 @@ gem "paperclip", "~> 4.2"
 gem 'aws-sdk', '~> 1.5.7'
 
 group :development, :test do
-  gem 'dotenv-rails'
+  gem "dotenv-rails"
 end
 
 # Task 11
-gem 'rails_12factor', group: :production
+gem "rails_12factor", group: :production
+
+# Task 13
+gem "levenshtein"
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
