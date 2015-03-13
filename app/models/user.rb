@@ -18,14 +18,10 @@ class User < ActiveRecord::Base
   end
 
   def self.notify_cards
-    mail_list = []
     users.each do |user|
       if user.cards.relevant_for_today.first.present
-        mail_list.push(user)
+        NotificationsMailer.pending_cards(user)
       end
-    end
-    mail_list.each do |user|
-      NotificationsMailer.pending_cards(user)
     end
   end
 end
