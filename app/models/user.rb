@@ -13,13 +13,11 @@ class User < ActiveRecord::Base
   belongs_to :current_deck, class_name: "Deck",
                             foreign_key: "current_deck_id"
 
-  scope :have_pending_cards, -> { where("review_date <= ?", Time.now).order("RANDOM()") }
-
   def set_deck(deck_id)
     update_attributes(current_deck_id: deck_id)
   end
 
-  def self.notify_pending_cards 
+  def self.notify_pending_cards
     card_set = Card.select("user_id").where("review_date <= ?", Time.now).group("user_id")
     card_set.each do |card|
       NotificationMailer.pending_cards(card.user)
