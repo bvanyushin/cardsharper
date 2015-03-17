@@ -3,9 +3,9 @@ class HomeController < ApplicationController
   def index
     if current_user.present?
       @card = if current_user.current_deck.present?
-                current_user.current_deck.cards.relevant_for_today.first
+                current_user.current_deck.cards.today_random.first
               else
-                current_user.cards.relevant_for_today.first
+                current_user.cards.today_random.first
               end
     end
   end

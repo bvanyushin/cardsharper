@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
   end
 
   def self.notify_pending_cards
-    card_set = Card.select("user_id").where("review_date <= ?", Time.now).group("user_id")
+    card_set = Card.select("user_id").today_relevant.distinct
     card_set.each do |card|
       NotificationMailer.pending_cards(card.user)
     end
