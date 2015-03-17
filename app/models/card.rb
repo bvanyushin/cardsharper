@@ -15,7 +15,8 @@ class Card < ActiveRecord::Base
   belongs_to :user
   belongs_to :deck
 
-  scope :relevant_for_today, -> { where("review_date <= ?", Time.now).order("RANDOM()") }
+  scope :today_relevant, -> { where("review_date <= ?", Time.now) }
+  scope :today_random, -> { today_relevant.order("RANDOM()") }
 
   def review(user_answer)
     reference = percolate_text(translated_text)

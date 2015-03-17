@@ -16,4 +16,11 @@ class User < ActiveRecord::Base
   def set_deck(deck_id)
     update_attributes(current_deck_id: deck_id)
   end
+
+  def self.notify_pending_cards
+    card_set = Card.select("user_id").today_relevant.distinct
+    card_set.each do |card|
+      NotificationMailer.pending_cards(card.user)
+    end
+  end
 end

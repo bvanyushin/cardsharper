@@ -69,8 +69,11 @@ end
 # Task 11
 gem "rails_12factor", group: :production
 
-# Task 13
+# Task 14
 gem "levenshtein"
+
+# Task 15
+gem 'whenever', require: false
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
